@@ -11,7 +11,7 @@
 
 ## Competition Results
 
-- **Overall:** Top 10 Finalist (selected for final presentation at IISc from 50+ teams)  
+- **Overall:** Top 10 Finalist team (selected for final presentation at IISc from 265 teams)  
 - **Task 1 (Bus ETA):** Competitive performance with GPS trajectory analysis  
 - **Task 2 (Auto ETA):** Strong results using H3 spatial features  
 - **Task 3 (Multimodal): 1st Place:** 69.18 MAE with novel piecewise calibration  
@@ -49,20 +49,24 @@ This project provides a comprehensive ML-based solution for ETA prediction in Be
 
 ## System Architecture
 
-┌─────────────────────────────────────────────────────────┐
-│ Bengaluru Transportation ETA System │
-├─────────────────────────────────────────────────────────┤
-│ │
-│ ┌───────────────┐ ┌────────────────┐ ┌────────────┐ │
-│ │ Task 1 │ │ Task 2 │ │ Task 3 │ │
-│ │ Bus ETA │ │ Auto ETA │ │ Multimodal ETA │ │
-│ └───────────────┘ └────────────────┘ └────────────┘ │
-│ │
-│ Route-Based Spatial-Aware Calibrated │
-│ Patterns Features Integration │
-│ │
-└─────────────────────────────────────────────────────────┘
-│
+```mermaid
+graph TD
+    A[Bengaluru Transportation ETA System] --> B[Bus ETA Module]
+    A --> C[Auto ETA Module]
+    A --> D[Multimodal ETA Module]
+
+    B --> B1[Feature Integration]
+    B --> B2[Route-Based Spatial-Aware Calibration]
+    B --> B3[Pattern Analysis]
+
+    C --> C1[Feature Integration]
+    C --> C2[Route-Based Spatial-Aware Calibration]
+    C --> C3[Pattern Analysis]
+
+    D --> D1[Bus + Auto Coordination]
+    D --> D2[Transfer Point Optimization]
+    D --> D3[Overall ETA Aggregation]
+
 
 
 ---
@@ -201,7 +205,7 @@ def calibrate_prediction(raw_pred, total_distance):
 - Docker
 - Python
 
-## 📈 Results Summary
+## Results Summary
 
 | **Aspect**              | **Task 1 – Bus ETA**                   | **Task 2 – Auto ETA**                     | **Task 3 – Multimodal ETA **              |
 |--------------------------|----------------------------------------|-------------------------------------------|------------------------------------------|
