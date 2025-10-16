@@ -210,7 +210,7 @@ def calibrate_prediction(raw_pred, total_distance):
 
 ## Results Summary
 
-| **Aspect**              | **Task 1 – Bus ETA**                   | **Task 2 – Auto ETA**                     | **Task 3 – Multimodal ETA **              |
+| **Aspect**               | **Task 1 – Bus ETA**                   | **Task 2 – Auto ETA**                     | **Task 3 – Multimodal ETA**              |
 |--------------------------|----------------------------------------|-------------------------------------------|------------------------------------------|
 | **Data Processed**       | 60 GB GPS trajectories                 | 30 GB auto trip data                      | Combined multi-source datasets           |
 | **Features Used**        | 45 + route-based features              | 60 + spatial + temporal + demand features | 50 + integrated multimodal features      |
