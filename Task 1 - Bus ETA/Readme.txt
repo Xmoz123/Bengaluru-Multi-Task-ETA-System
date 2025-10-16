@@ -110,3 +110,65 @@ Real-time prediction pipeline for sequential multi-stop ETA:
 - Monotonicity constraints for logical consistency
 
 ## Usage
+## Usage
+```python
+# Import feature extractor and inference pipeline
+from feature_engineering import ETAFeatureExtractor
+from inference import ETAInferencePipeline
+
+# 1. Initialize the feature extractor with stop coordinates
+extractor = ETAFeatureExtractor(stop_coords=stop_coordinates)
+
+# 2. Extract features from a GPS trajectory for a specific target stop
+features = extractor.extract_features(
+    gps_trajectory=trajectory_df,
+    target_stop_id='STOP_123'
+)
+
+# 3. Load trained models into the inference pipeline
+pipeline = ETAInferencePipeline(
+    lgb_models=lgb_models,
+    cb_models=cb_models,
+    xgb_models=xgb_models,
+    ensemble_weights={'lgb': 0.50, 'cb': 0.25, 'xgb': 0.25},
+    feature_names=feature_names,
+    historical_lookup=historical_lookup
+)
+
+# 4. Predict sequential ETAs for the next 5 stops
+etas = pipeline.predict_sequence(
+    test_trajectory=current_trajectory,
+    future_stops=next_5_stops
+)
+
+# 5. Output cumulative ETAs in minutes
+print(etas)  # Example output: [3.2, 8.7, 14.5, 21.3, 28.9]
+``` 
+
+
+## Performance Metrics
+
+**Training:**
+- Dataset: 195,724 samples, 60 features
+- Training time: ~45 minutes (5-fold CV, 3 models)
+- Memory: ~8GB peak usage
+
+**Inference:**
+- Prediction time: <100ms per 5-stop sequence
+- Model size: ~50MB (all 15 models)
+- Production ready: Thread-safe, error-handled
+
+## Future Improvements
+
+1. **Real-time traffic integration:** External traffic API features
+2. **Route deviation handling:** Off-route detection and re-routing
+3. **Weather impact modeling:** Precipitation and visibility features
+4. **Passenger load estimation:** Dwell time prediction enhancement
+5. **Dynamic model updating:** Online learning for concept drift
+
+## Competition Context
+
+**IISc Bengaluru Last Mile Challenge 2025 - Task 1**
+- Ranking: Competitive performance (Top 10)
+- Dataset: 60GB Bengaluru bus GPS trajectories
+- Evaluation: Mean Absolute Error (MAE) on held-out test set
