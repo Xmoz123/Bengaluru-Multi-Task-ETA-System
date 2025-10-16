@@ -51,9 +51,11 @@ This project provides a comprehensive ML-based solution for ETA prediction in Be
 
 ```mermaid
 graph TD
-    A[Bengaluru Transportation ETA System] --> B[Bus ETA Module]
-    A --> C[Auto ETA Module]
-    A --> D[Multimodal ETA Module]
+    A[Bengaluru Transportation ETA System]
+    
+    A --> B[Bus ETA]
+    A --> C[Auto ETA]
+    A --> D[Multimodal ETA]
 
     B --> B1[Feature Integration]
     B --> B2[Route-Based Spatial-Aware Calibration]
@@ -65,7 +67,8 @@ graph TD
 
     D --> D1[Bus + Auto Coordination]
     D --> D2[Transfer Point Optimization]
-    D --> D3[Overall ETA Aggregation]
+    D --> D3[Final ETA Aggregation]
+```
 
 
 
